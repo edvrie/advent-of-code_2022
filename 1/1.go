@@ -36,7 +36,6 @@ func part1(fileLines []int) {
 	max := fileLines[0]
 
 	for _, element := range fileLines {
-		fmt.Println(element, max)
 		if (max < element) {
 			max = element
 		}

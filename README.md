@@ -2,4 +2,4 @@
 
 Just a repo of me posting my horrible solutions (and code)
 
-Look at your own risk :)
+View at your own risk :)

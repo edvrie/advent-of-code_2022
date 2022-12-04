@@ -30,6 +30,8 @@ func main() {
 		}
 	}
 
+	file.Close()
+
 	fmt.Println("Answer part 1: ", score1)
 	fmt.Println("Answer part 2: ", score2)
 	elapsed := time.Since(startTime)

@@ -76,6 +76,8 @@ func main() {
 	elapsed := time.Since(startTime)
 
 	fmt.Printf("Done in:  %s", elapsed)
+
+	file.Close()
 }
 
 func part1(qty, from, to int, containers []stack) {

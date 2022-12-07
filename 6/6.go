@@ -25,7 +25,7 @@ func main() {
 
 func part1(line string) int {
 	for index := range line {
-		uniqMap := make(map[string]bool)
+		uniqMap := make(map[string]bool, 4)
 		subStr := line[index:index+4]
 
 		for _, el := range subStr {
@@ -46,7 +46,7 @@ func part1(line string) int {
 
 func part2(line string) int {
 	for index := range line {
-		uniqMap := make(map[string]bool)
+		uniqMap := make(map[string]bool, 14)
 		subStr := line[index:index+14]
 
 		for _, el := range subStr {

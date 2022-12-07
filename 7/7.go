@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"math"
 	"strconv"
 	"strings"
 )
@@ -13,22 +14,16 @@ func main() {
 	fileName := "7_input.txt"
 	input, _ := ioutil.ReadFile(fileName)
 	commands = strings.Split(string(input), "\n")
-	// fmt.Println(commands)
 	run()
 
 	fmt.Println()
 }
 
-func run() int {
+func run() {
 	root := &Node{name: "/", size: 0}
 	current := root
-	// size := 0
-	// fmt.Println(commands[1:])
+
 	for _, element := range commands[1:] {
-		// fmt.Println(current)
-		// for _, t := range current.children {
-		// 	fmt.Println(string(t.name))
-		// }
 		symbols := strings.Split(element, " ")
 		switch symbols[0] {
 		case "$":
@@ -54,12 +49,10 @@ func run() int {
 			current.size += val
 		}
 	}
-			for _, t := range root.children {
-			fmt.Println(string(t.name), t.size)
-		}
 
-	fmt.Println(root.children)
-	return 0
+	fmt.Println("Answer part 1: ", findSum(root))
+
+	fmt.Println("Answer part 2: ", findMin(root))
 }
 
 func addToParents(size int, node *Node) {
@@ -67,6 +60,47 @@ func addToParents(size int, node *Node) {
 		node.parent.size += size
 		addToParents(size, node.parent)
 	}
+}
+
+func findSum(node *Node) int {
+	sum := 0
+	if (node.size <= 100000) {
+		sum += node.size
+	}
+
+	for _, el := range node.children {
+		sum += findSum(el)
+	}
+
+	return sum
+}
+
+func findMin(node *Node) int {
+	var validSizes []int
+	lim :=  30000000 - (70000000 - node.size)
+
+	validSizes = getValid(node, validSizes, lim)
+
+	min := math.MaxInt64
+
+	for _, el := range validSizes {
+		if (el < min) {
+			min = el
+		}
+	}
+
+	return min
+}
+
+func getValid(node *Node, validSizes []int, lim int) []int {
+	if (node.size >= lim) {
+		validSizes = append(validSizes, node.size)
+	}
+	for _, el := range node.children {
+		validSizes = getValid(el, validSizes, lim)
+	}
+
+	return validSizes
 }
 
 func findIndex(value string, children []*Node) int {

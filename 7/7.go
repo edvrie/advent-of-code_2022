@@ -15,8 +15,6 @@ func main() {
 	input, _ := ioutil.ReadFile(fileName)
 	commands = strings.Split(string(input), "\n")
 	run()
-
-	fmt.Println()
 }
 
 func run() {
